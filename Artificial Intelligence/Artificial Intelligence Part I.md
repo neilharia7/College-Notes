@@ -11,3 +11,26 @@
     * Actions that the agent can perform
     * Percept
     * Environment (States)
+* An **autonomous agent** does not rely entirely on built-in knowledge about the environment. It adapts to the environment through experience i.e. *learning*.
+* An **agent program** is a function that implements the agent mapping from the percepts to actions.
+
+### Types of Agents
+#### Simple Reflex Agent
+
+#### Reflex Agents with States (Model-Based)
+
+#### Goal-Based Agents
+
+#### Utility-Based Agents
+
+### Types of Enviroment
+
+* **Accessible (vs Inaccessible):**
+* **Deterministic (vs Non-Deterministic / Stochastic):** 
+* **Discrete (vs Continuous):**
+* **Episodic (vs Sequential):**
+* **Observable (vs Partially-Observable):**
+* **Single agent (vs Multiple agents):**
+* **Static (vs Dynamic):**
+
+## Problem Formulation
