@@ -83,4 +83,34 @@
 	- experimentation is often needed
 		- hypotheses as actions, search in the real world
 		- *learning* builds the agent's knowledge of states and actions progressively
-
+		
+### Well-Defined Problem Formulation
+* 	Definition of the problem
+	*	The information used by an agent to decide what to do.
+*	Specification:
+	*	`Initial State`
+	*	`Action State` i.e. available actions (successor functions)
+	*	`State Space` i.e. reachable states from the initail state
+		*	Solution Path: sequence of actions from one state to another
+	*	`Goal Test`
+		*	single state, enumerated list of states, abstract properties
+	*	`Cost Function`
+		*	Path Cost *g(n)* i.e. sum of all (action) step costs along the path
+*	Solution
+	*	A path (a sequence of operators leading) from the Initial State to a Final State that satisfies the Goal Test.
+*	Search Cost
+	*	Does the agent find the solution?
+	*	Is it an good solution (i.e. with a low path cost)
+	*	What is the cost to find the solution?
+*	Total Cost of Problem Solving = Search Cost + Path Cost
+	*	Trade-offs often required.
+		*	Search for a very long time for an optimal solution. (e.g. Dijkstra's algorithm)
+		*	Search for a shorter time for a *good enough* solution.
+		
+## Search
+*	A **search agorithm** explores the state space by generating successors of already explored (known) states i.e. expanding the states.
+*	A **search strategy** is defined by picking the order of node expansion. Preformance of strategies are evaluated by the following metrics:
+	*	**Time Complexity:** How long does it take to find the solution?
+	*	**Space Complexity:** How much memory is needed to perform the search?
+	*	**Completeness:** Does it always find a solution if one exists?
+	*	**Optimality:**: Does it always find the best (least-cost) solution?
