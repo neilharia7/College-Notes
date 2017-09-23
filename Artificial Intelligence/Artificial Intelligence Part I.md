@@ -113,4 +113,63 @@
 	*	**Time Complexity:** How long does it take to find the solution?
 	*	**Space Complexity:** How much memory is needed to perform the search?
 	*	**Completeness:** Does it always find a solution if one exists?
-	*	**Optimality:**: Does it always find the best (least-cost) solution?
+	*	**Optimality**: Does it always find the best (least-cost) solution?
+
+### Performance Evaluation
+*	Measuring difficulty of an AI problem:
+	*	`Branching Factor` (number of successors (children) of a node)
+	*	`Average Branching Factor` (Total branches ÷ number of non-leaf nodes)
+	*	`Depth of *Shallowest* Goal Node`
+	*	`Maximum length of any path in state space`
+*	Time Complexity
+	*	 measured in terms of the number of nodes generated during search
+*	Space Complexity
+	*	measured in terms of the maximum number of nodes stored in memory
+*	Search Cost
+	*	depends on the time complexity
+	*	can also include memory usage
+*	Total Cost
+	*	combines the search cost and solution cost (path cost of the solution found)
+	
+### Search Strategies 
+*	Uninformed Search Strategies
+	*	use only the information available in the problem definition
+		*	Breadth-First Search (BFS)
+		*	Depth-First Search (DFS)
+		*	Uniformed-Cost Search
+		*	Depth-Limited Search
+		*	Iterative Deepening Search (IDS) or (more specifically) Iterative Deepening Depth-First Search (IDDFS)
+	*	Informed Search Strategies 
+		*	use problem-specific knowledge to guide the search
+		*	usually more efficient (than uninformed search)
+		
+## Uninformed Search
+### Variables used
+*	**b**: 	Maxiumum Branching Factor
+*	**d**:	Depth of Least-Cost solution
+*	**m**:	Maximum Depth of State Space
+
+### Breadth-First Search
+*	Expand shallowest unexpanded node.
+	*	Can be implemented using a FIFO queue.
+*	Time: *1 + b + b<sup>2</sup> + b<sup>3</sup> + ... + b<sup>d</sup> = O(b<sup>d</sup>)*
+*	Space: Assuming every node is kept in memory, *O(b<sup>d</sup>)*.
+*	Complete: Yes
+*	Optimal: Yes, when all steps cost equally
+*	**Applications:**
+	*	Testing graph for bipartitness
+	*	*Ford-Fulkerson* method for computing the maximum flow in a flow network
+	*	Finding the shortest path between two nodes u and v, with path length measured by number of edges (an advantage over DFS)
+
+### Depth-First Search
+- Expand deepest unexpanded node.
+	- Can be implemented using a LIFO stack.
+	- Backtrack only when no more expansion is possible.
+- Time: *O(b<sup>m</sup>)*
+- Space: *O(bm)*
+- Complete:
+	- Infinite-depth Spaces: No
+	- Finite-depth Spaces w/ Loops: No
+	- Finite-depth Spaces w/o Loops: Yes
+- Optimal: No
+
