@@ -43,9 +43,12 @@
 ### Types of Enviroment
 
 * **Accessible (vs Inaccessible):**
+	*	`The agent’s sensory apparatus gives it access to the complete state of the environment.`
 * **Deterministic (vs Non-Deterministic / Stochastic):** 
-* **Discrete (vs Continuous):**
-* **Episodic (vs Sequential):**
+* **Discrete (vs Continuous):**	
+	*	`There are a limited number of distinct percepts and actions.`
+* **Episodic (vs Sequential):**	
+	*	`Each episode is not affected by the actions taken in previous episodes.`
 * **Observable (vs Partially-Observable):**
 * **Single agent (vs Multiple agents):**
 * **Static (vs Dynamic):**
@@ -119,7 +122,7 @@
 *	Measuring difficulty of an AI problem:
 	*	`Branching Factor` (number of successors (children) of a node)
 	*	`Average Branching Factor` (Total branches ÷ number of non-leaf nodes)
-	*	`Depth of *Shallowest* Goal Node`
+	*	`Depth of Shallowest Goal Node`
 	*	`Maximum length of any path in state space`
 *	Time Complexity
 	*	 measured in terms of the number of nodes generated during search
@@ -162,14 +165,74 @@
 	*	Finding the shortest path between two nodes u and v, with path length measured by number of edges (an advantage over DFS)
 
 ### Depth-First Search
-- Expand deepest unexpanded node.
-	- Can be implemented using a LIFO stack.
-	- Backtrack only when no more expansion is possible.
-- Time: *O(b<sup>m</sup>)*
-- Space: *O(bm)*
-- Complete:
-	- Infinite-depth Spaces: No
-	- Finite-depth Spaces w/ Loops: No
-	- Finite-depth Spaces w/o Loops: Yes
-- Optimal: No
+*	Expand deepest unexpanded node.
+	*	Can be implemented using a LIFO stack.
+	*	Backtrack only when no more expansion is possible.
+*	Time: *O(b<sup>m</sup>)*
+*	Space: *O(bm)*
+*	Complete:
+	*	Infinite-depth Spaces: No
+	*	Finite-depth Spaces w/ Loops: No
+	*	Finite-depth Spaces w/o Loops: Yes
+*	Optimal: No
+*	**Applications:**
+	*	Topological Sorting
+	*	Maze generation may use a randomized depth-first search
+	*	Finding biconnectivity in graphs
+	
+### Depth-Limited Search
+*	To avoid infinite searching, DFS with a cutoff on a max. depth *l* of a path.
+*	Time: *O(b<sup>l</sup>)*
+*	Space: *O(bl)*
+*	Complete: Yes, if *l* &ge; *d*
+*	Optimal: No
+
+### Iterative Deepening Search
+*	Improvement on Depth-Limited Search. Iteratively estimate the max. depth *l* of DLS one-by-one.
+*	Time: *O(b<sup>d</sup>)*
+*	Space: *O(bd)*
+*	Complete: Yes
+*	Optimal: Yes
+
+## Informed Search
+
+*	Uninformed search strategies have a systematic generation of new states but are inefficient.
+*	Informed search strategies use problem-specific knowledge to determine which node to expand next.
+
+#### Best First Search
+*	Expand most desirable unexpanded node.
+	*	Use an evaluation function *f(n)* to estimate the cost of each node.
+	*	Nodes are ordered so that the one with the lowest *f(n)* is expanded first.
+	*	The choice of *f* determines the search strategy.
+
+#### Heuristic Function
+*	**Path Cost Function** ***g(n)*****:**
+	*	Cost from initial state to current state *n*.
+	*	No information on the cost towards the goal.
+	*	Need to estimate the cost to the closest goal.
+
+*	**Heuristic Function** ***h(n)*****:**
+	*	Estimated cost of the cheapest path from the state at node *n* to a goal state.
+		*	Exact cost cannot be determined.
+	*	Depends only on the state at that node.
+	*	Additional knowledge of the problem is imparted to the search algorithm.
+	*	Non-negative, problem specific function.
+	*	If *n* is a goal node, then `h(n) = 0`.
+
+### Greedy Best-First Search
+*	Expands the node that appears to be closest to the goal.
+	*	Evaluation Function: `f(n) = h(n)`
+	*	Objective: Quick Solution (but may be suboptimal)
+*	The cost is estimated using problem-specific knowledge.
+*	Time: *O(b<sup>m</sup>)* (Worst Case)
+*	Space: *O(b<sup>m</sup>)* (Worst Case)
+*	Complete: No
+*	Optimal: No
+*	`With a good heuristic function, the complexity can be reduced substantially.`
+	
+### A* Search
+
+### MiniMax Algorithm
+
+### &alpha;-&beta; Pruning
 
