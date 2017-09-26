@@ -195,7 +195,6 @@
 *	Optimal: Yes
 
 ## Informed Search
-
 *	Uninformed search strategies have a systematic generation of new states but are inefficient.
 *	Informed search strategies use problem-specific knowledge to determine which node to expand next.
 
@@ -219,7 +218,7 @@
 	*	Non-negative, problem specific function.
 	*	If *n* is a goal node, then `h(n) = 0`.
 
-### Greedy Best-First Search
+### Greedy Best-First Search 
 *	Expands the node that appears to be closest to the goal.
 	*	Evaluation Function: `f(n) = h(n)`
 	*	Objective: Quick Solution (but may be suboptimal)
@@ -231,8 +230,38 @@
 *	`With a good heuristic function, the complexity can be reduced substantially.`
 	
 ### A* Search
+*	Uniform-Cost Search: (UCS)
+	*	*g(n)*: Path cost to reach node *n* from the start node (Past Experience).
+	*	`Optimal & Complete, but inefficient.`	
+
+*	Greedy Best-First Search: (GBFS)
+	*	*h(n)*: Estimated cost of the cheapest path from node *n* to goal node (Future Cost).
+	*	`Neither Optimal nor Complete but relatively more efficient.`
+
+*	Combining UCS and GBFS, A* Search:
+	*	*f(n) = g(n) + h(n)*
+	*	*f(n)*: Estimated total cost of the cheapest path through node *n* from start node to goal.
+	*	`Optimal & Complete when` *h(n)* `statisfies certain conditions.`
+	
+#### Optimality of A* Search
+*	If *h* is **admissible**, then the tree-search version of A* search is optimal.
+
+#### Complexity of A*
+*	Time: exponential in length of solution
+*	Space: exponential in length of solution
+*	With a good heuristic, significant savings are still possible compared to uninformed search methods.
+*	Variants of A* search exist to deal with complexity issues.
+
+### Heuristics
+#### Admissible Heuristic
+*	*h&ast;(n)*: True cost from node *n* to goal.
+*	A heuristic is admissible if ***h(n) &le; h&ast;(n)*** for all *n*.
+*	An admissible heuristic should never overestimate the cost to reach the goal.
+*	i.e. *f(n)* never overestimates the actual cost of a path through node *n* to the goal.
+
 
 ### MiniMax Algorithm
 
 ### &alpha;-&beta; Pruning
 
+### Constraint Satisfaction Problems
