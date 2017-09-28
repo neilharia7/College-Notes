@@ -259,9 +259,57 @@
 *	An admissible heuristic should never overestimate the cost to reach the goal.
 *	i.e. *f(n)* never overestimates the actual cost of a path through node *n* to the goal.
 
+#### Dominance
+*	*h<sub>2</sub>* dominates *h<sub>1</sub>* if ***h<sub>2</sub>(n) &ge; h<sub>1</sub>(n)*** for all *n*.
+*	Domination translates to efficiency.
+*	Always better to use a heuristic function with higher values as long as it does not overestimate the cost.
+*	If no heuristic dominates, *h(n) = max(*h<sub>1</sub>*(n), *h<sub>2</sub>*(n), ... , h<sub>m</sub>(n))*.
+
+### Relaxed Problem
+- A problem with fewer restrictions on the actions compared to an original problem is called a relaxed problem.
+- State space graph of the relaxed problem is a supergraph of the original state space.
+- Removal of restrictions creates more edges in the graph.
+
+#### Heuristics from Relaxed Problems
+- The cost of an optimal solution to a relaxed problem is an admissible heuristic for the original problem.
+	- Relaxed problem adds edges to the state space.
+	- Any optimal solution in the original problem is also a solution for the relaxed problem.
 
 ### MiniMax Algorithm
+#### MIN & MAX
+*	Assumption: You are **MAX**.
+*	In a normal search problem, the optimal solution is a sequence of moves leading to a goal state &mdash; a terminal state that is a win.
+*	In a game, *MIN* affects the solution.
+*	The optimal strategy cannot perform worse than any strategy against an infallible opponent (i.e. MIN plays optimally) &mdash; it maximises the worst case outcome for MAX.
+
+#### Minimax Algorithm
+*	Minimax algorithm performs a depth-first exploration of the game tree.
+*	Time: *O(b<sup>m</sup>)*, *b* is the no. of legal moves at each point and *m* is the max. depth of the tree.
+*	Space: *O(bm)* if it generates all the successors at once **OR** *O(m)* if it generates successors one at a time.
+*	For real games, the time cost is impractical.
 
 ### &alpha;-&beta; Pruning
+*	In minimax search, the number of game states to examine is exponential in the number of moves.
+*	The exponent cannot be eliminated but it can be halved by pruning away branches that cannot possibly influence the final decision.
+*	Returns the same move as the minimax algorithm.
+
+**General Idea**
+
+*	If *m* is better than *n* for Player, then
+	*	the state with utility *n* will never be reached
+	*	and hence can be pruned away
+	
+**Note:**
+*	*&alpha; is the lower bound of optimal utility.*
+*	*&beta; is the upper bound of the optimal utility.*
+*	*The maximiser is always trying to push the value of &alpha; up.*
+*	*The minimiser is always trying to push the value of &beta; down.*
+*	*If the node's value is between &alpha; & &beta;, then the players might reach it.*
+*	*At the beginning (root of the tree), we set &beta; to &infin; and &alpha; to -&infin;.*
+
+#### Advantages
+*	Pruning does not affect the final result.
+*	Effectiveness of pruning depends on the order in which successor nodes are examined.
+	*	In the ideal case, the time complexity can be reduced to *O(b<sup>m/2</sup>)*.
 
 ### Constraint Satisfaction Problems
