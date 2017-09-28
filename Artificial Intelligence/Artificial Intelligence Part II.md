@@ -19,6 +19,65 @@
 
 **Precedence (from highest to lowest):** &not;, &and;, &or;, &rArr;, &hArr;
 
+### Validity & Inference
+*	A sentence can be tested for validation using truth tables and checking all possible configurations.
+
+### Inference Rules
+**Implication-Elimination or** ***Modus Ponens:***
+>	&alpha; &rArr; &beta;,&nbsp; &alpha; &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &beta;
+
+**And-Elimination:**
+>	&alpha;<sub>1</sub> &and; &alpha;<sub>2</sub> &and; &alpha;<sub>3</sub> &and; ... &alpha;<sub>n</sub> &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &alpha;<sub>i</sub>
+
+**And-Introduction:**
+> 	&alpha;<sub>1</sub>, &alpha;<sub>2</sub>, &alpha;<sub>3</sub>, ... &alpha;<sub>n</sub> &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &alpha;<sub>1</sub> &and; &alpha;<sub>2</sub> &and; &alpha;<sub>3</sub> &and; ... &alpha;<sub>n</sub>
+
+**Or-Introduction:**
+>	&alpha;<sub>i</sub> &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &alpha;<sub>1</sub> &or; &alpha;<sub>2</sub> &or; &alpha;<sub>3</sub> &or; ... &alpha;<sub>n</sub>
+
+**Double-Negation-Elimination:**
+> 	&not;&not;&alpha; &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &alpha;
+
+**Unit Resolution:**
+> 	&alpha; &or; &beta;,&nbsp; &not;&beta; &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &alpha;
+
+**Disjunctive Resolution:**
+> 	&alpha; &or; &beta;,&nbsp; &not;&beta; &or; &gamma; &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &alpha; &or; &gamma;
+
+**Implicative Resolution:**
+> 	&not;&alpha; &rArr; &beta;,&nbsp; &beta; &rArr; &gamma; &nbsp;&nbsp; &#8872; &nbsp;&nbsp; &not;&alpha; &rArr; &gamma;
+
+### Equivalence Rules
+**Associativity:**
+> 	&alpha; &and; (&beta; &and; &gamma;) &nbsp;&nbsp; &hArr; &nbsp;&nbsp; (&alpha; &and; &beta;) &and; &gamma;
+
+> 	&alpha; &or; (&beta; &or; &gamma;) &nbsp;&nbsp; &hArr; &nbsp;&nbsp; (&alpha; &or; &beta;) &or; &gamma;
+
+**Distributivity:**
+> 	&alpha; &and; (&beta; &or; &gamma;) &nbsp;&nbsp; &hArr; &nbsp;&nbsp; (&alpha; &and; &beta;) &or; (&alpha; &and; &gamma;)
+
+> 	&alpha; &or; (&beta; &and; &gamma;) &nbsp;&nbsp; &hArr; &nbsp;&nbsp; (&alpha; &or; &beta;) &and; (&alpha; &or; &gamma;)
+
+**De Morgan's Law:**
+> 	&not;(&alpha; &or; &beta;) &nbsp;&nbsp; &hArr; &nbsp;&nbsp; &not;&alpha; &and; &not;&beta;
+
+> 	&not;(&alpha; &and; &beta;) &nbsp;&nbsp; &hArr; &nbsp;&nbsp; &not;&alpha; &or; &not;&beta;
+
+**Conjunctive Normal Form:**
+> 	A &rArr; B &nbsp;&nbsp; &hArr; &nbsp;&nbsp; &not;A &or; B
+
+>	A &hArr; B &nbsp;&nbsp; &hArr; &nbsp;&nbsp; (&not;A &or; B) &and; (A &or; &not;B)
+
+### Complexity of Inference
+*	Proof by truth-table is complete but has exponential time complexity.
+*	Inferring new sentences using various inference rules and proving thus is more efficient.
+*	Using a logic programming language like Prolog, which uses horn clauses and *Modus Ponens*, inference can be achieved in polynomial time complexity.
+	*	**Horn Clauses:** A disjunction of literals with at most one unnegated literal.
+		*	Definite Clause:
+			*	&not;P &or; &not;Q &or; ... &or; &not;T &or; U
+			*	P &and; Q &and; ... &and; T &rArr; U
+		- Fact: U
+
 
 ## First Order Logic (FOL)
 *	In first-order logic, the world is seen as object with properties (about each object) and relations (betweeen objects).
@@ -41,8 +100,8 @@
 
 ### Conversion to CNF (Conjunctional Normalized Form)
 *	Eliminate biconditionals &hArr; and implications &rArr;
-*	**Eliminate &hArr; replacing &alpha; &hArr; &beta; with (&alpha; &rArr; &beta;) &and; (&beta; &rArr; &alpha;)**
-*	**Eliminate &rArr; replacing &alpha; &rArr; &beta; with &not; &alpha; &or; &beta;**
+*	*Eliminate &hArr; replacing &alpha; &hArr; &beta; with (&alpha; &rArr; &beta;) &and; (&beta; &rArr; &alpha;)*
+*	*Eliminate &rArr; replacing &alpha; &rArr; &beta; with &not; &alpha; &or; &beta;*
 
 
 
