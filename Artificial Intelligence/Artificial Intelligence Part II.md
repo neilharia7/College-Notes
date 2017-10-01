@@ -98,10 +98,35 @@
 	*	have a truth value
 *	**Complex Sentences** combine sentences with connectives identical to propositional logic.
 
+### Quantifiers 
+
+#### Universal Quantifier &forall;
+*	Express properties about a collection of objects.
+*	Applies to every object in the collection.
+*	e.g. &forall;x, King(x) &rArr; Mortal(x)
+*	&rArr; is the natural connective to use with &forall;.
+
+#### Existential Quantifier &exist;
+*	Express properties of one or more particular objects in a collection.
+*	e.g. &exist;x, P(x) &and; Q(x)
+*	&and; is the natural connective to use with &exist;.
+
+#### Connections between Quantifiers
+> &forall;x P(x) &nbsp; &hArr; &nbsp; &not;&exist;x &not;P(x)
+
+> &forall;x &not;P(x) &nbsp; &hArr; &nbsp; &not;&exist;x P(x)
+
+> &not;&forall;x P(x) &nbsp; &hArr; &nbsp; &exist;x &not;P(x)
+
+> &not;&forall;x &not;P(x) &nbsp; &hArr; &nbsp; &exist;x P(x)
+
+### Equality Predicate Symbol
+*	States that two terms refer to the same object.
+	*	e.g. Father(John) = Henry
+	*	e.g. =(Father(John), Henry)
+*	Useful to define properties.
+
 ### Conversion to CNF (Conjunctional Normalized Form)
 *	Eliminate biconditionals &hArr; and implications &rArr;
 *	*Eliminate &hArr; replacing &alpha; &hArr; &beta; with (&alpha; &rArr; &beta;) &and; (&beta; &rArr; &alpha;)*
 *	*Eliminate &rArr; replacing &alpha; &rArr; &beta; with &not; &alpha; &or; &beta;*
-
-
-
