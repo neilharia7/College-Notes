@@ -1,5 +1,87 @@
 # Artificial Intelligence Part II
 
+## Logical Agents
+### The Knowledge-Based Approach
+*	Agents that *know*
+	*	achieve competence by being told new knowledge or by learning.
+	*	achieve adaptibility by updating their knowledge.
+	*	*Knowledge Representation*
+	
+*	Agents that *reason*
+	*	use knowledge to deduce the course of action .
+	*	*Knowledge Inference*
+	
+### Knowledge-Based Agents
+*	Knowledge Base (KB): Set of Sentences (Sentence = Representation of a Fact/Rule).
+*	Adding & Querying Knowledge
+	*	*TELL*: add a sentence to the KB
+	*	*ASK*: retrieve knowledge from the KB
+		*	Answer must *follow* from what has been *TELL*-ed.
+		
+*	Infernce Mechanism: Determines what follows from the KB.
+*	Knowledge Based System
+	*	States: Instances of the KB
+	*	Operators: Add/Infer a `new sentence`
+	*	Goal: Answer a Query
+	
+### Levels of Knowledge
+*	**Epistemological Level:** Declarative description of knowledge.
+	*	e.g. facts: "there is smoke", rules: "if there is smoke, there is fire"
+*	**Logical Level:** Logical encoding of knowledge (into sentences).
+	*	e.g. facts: Smoke, rules: Implies(Smoke, Fire)
+*	**Implementation Level:** Physical representation of knowledge.
+	*	e.g. Strings, 2-D Arrays etc.
+
+### Knowledge Representation
+*	The KB (set of sentences ) needs to be expressed in a computer-tractable form.
+*	The KR language must be expressive, concise, unambiguous, context-independent & effective.
+*	KR Language split into:
+	*	`Syntax` - a set of rules for writing sentences.
+	*	`Semantics` - a set of rules (or contraints) for relating sentences to real-world facts.
+	
+### Reasoning & Logic
+*	Logic = Representation + Inference
+*	Reasoning - Construction of new sentences from existing ones.
+*	Entailment - Generate sentences that are necessarily true, given that the existing sentences are true. KB &#8872; &alpha;.
+
+ #### Inference:
+*	*Inference (reasoning) is the process by which conclusions are reached.*
+*	Logical inference (deduction) is the process that implements entailment between sentences.
+*	Properties of Inference:
+	*	**Soundness:** An inference algorithm is sound if it derives only sentences that are entailed by the KB.
+	*	**Completeness:** An inference algorithm is complete if it can derive any sentence that is entailed by the KB.
+	*	**Proof Theory:** A set of rules for deducing the entailments of sentences.
+	
+*	**Valid** Sentence (Tautology): iff TRUE under all possible interpretations in all possible worlds. e.g. S &or; &not;S is valid.
+*	**Satisfiable** Sentence: iff there is some interpretation in some world for which it is TRUE. e.g. S &and; &not;S is unsatisfiable.
+
+**Deductive Inference:**
+
+X &rArr; Y, X &#8866; Y
+
+- Sound.
+- *Modus Ponens*.
+
+**Inductive Inference:**
+
+X &rArr; Y, Y &#8866; X
+
+- Not sound.
+- Generalisation.
+
+#### Different Logics
+*	**Propositional Logic:**
+	*	Symbols represent propositions (facts).
+	*	Boolean connectives combine symbols.
+*	**First-Order Logic:**
+	*	Objects and predicates (unary, binary or n-ary) represent properties of and relations between objects.
+	*	Variables, boolean connectives and quantifiers.
+*	**Temporal Logic:**
+	*	World ordered by a set of time points/intervals.
+*	**Probabilistic & Fuzzy Logic:**
+	*	Degrees of belief and truth in sentences.
+	*	e.g. "Washington is a large city" with truth degree 0.6.
+
 ## Propositional Logic
 *	**Symbols:**
 	*	Logical Contants: TRUE, FALSE
