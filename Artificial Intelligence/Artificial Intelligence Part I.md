@@ -320,7 +320,8 @@
 	- Probability needs to be taken into account.
 
 ### Constraint Satisfaction Problems (CSP)
-*	`Goal:` Dicover some state that satisfies a given set of contraints.
+*	`Initial State:` Empty
+*	`Goal:` Discover some state that satisfies a given set of contraints.
 *	`State:` Defined by variables *V<sub>i</sub>* with values from domain *D<sub>i</sub>*.
 *	`Goal Test:` A set of constraints specifying allowable combinations of values for subsets of variables.
 *	Constraints can be unary (involving one variable), binary (involving two variables) or high-order (involving more than two variables).
