@@ -202,11 +202,29 @@ X &rArr; Y, Y &#8866; X
 
 > &not;&forall;x &not;P(x) &nbsp; &hArr; &nbsp; &exist;x P(x)
 
+**Note**
+*	Remember that the semantics depends on the ordering of the quantifiers if more than one is used.
+
 ### Equality Predicate Symbol
 *	States that two terms refer to the same object.
 	*	e.g. Father(John) = Henry
 	*	e.g. =(Father(John), Henry)
 *	Useful to define properties.
+
+### Using First-Order Logic
+*	The *knowledge domain* is the part of the world we want to express knowledge about.
+*	The **facts** and **rules** are fed into the KB (knowledge base).
+*	TELLing the KB:
+	*	i.e. Assertion (add sentence to the KB)
+	*	e.g. TELL(KB, &forall;x,y MotherOf(x) = y &hArr; Parent(x, y) &and; Female(y))
+*	ASKing the KB:
+	*	i.e. Query (retrieve/infer a sentence from the KB)
+	*	Yes/No Answer
+		*	e.g. ASK(KB, Grandparent(Elizabeth, William))
+	*	Binding List or *Substitution*
+		*	e.g. ASK(KB, &exist;x Child(William, x)) yields (x / Charles)
+*	Knowedge-based agents need to use goals in conjuction with knowledge to make plans.
+	
 
 ### Conversion to CNF (Conjunctional Normalized Form)
 *	Eliminate biconditionals &hArr; and implications &rArr;
