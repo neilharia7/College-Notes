@@ -49,9 +49,9 @@
 *	Logical inference (deduction) is the process that implements entailment between sentences.
 *	Properties of Inference:
 	*	**Soundness:** An inference algorithm is sound if it derives only sentences that are entailed by the KB. 
-	( If A⊢B then A⊨B )
+		*	If A⊢B then A⊨B
 	*	**Completeness:** An inference algorithm is complete if it can derive any sentence that is entailed by the KB. 
-	( If A⊨B then A⊢B )
+		*	If A⊨B then A⊢B
 	*	**Proof Theory:** A set of rules for deducing the entailments of sentences.
 	
 *	**Note:** A⊨B means that B is true in every structure in which A is true. A⊢B means B can be proved using A as the premises. 
