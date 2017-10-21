@@ -269,7 +269,17 @@ Existential quantifiers (&exist;) can be eliminated by replacing the correspondi
 
 **Pseudo Algorithm**
 1.	TELLing a new sentence &alpha;.
-2.	
+2.	If &alpha; is already in the KB, do nothing.
+3.	Find all the implications that have &alpha; as a premise, i.e. &alpha; &and; &alpha;<sub>1</sub> &and; ... &and; &alpha;<sub>n</sub> &rArr; &beta;.
+4. 	Then, if all the other premises &alpha;<sub>i</sub> are known under some MGU &theta;, infer the conclusion &beta; under &theta;.
+5. 	If some premises &alpha;<sub>i</sub> can be matched several ways, then infer each corresponding conclusion.
+
+**Using Forward Chaining**
+
+1. 	Given a KB, derive all the facts and rules.
+2. 	If there are facts with &exist;, skolemize them and derive the new facts.
+3. 	Use GMP to satisfy the rules and derive new facts recursively until the goal is reached.
+
 ### Conversion to CNF (Conjunctional Normalized Form)
 *	Eliminate biconditionals &hArr; and implications &rArr;
 *	*Eliminate &hArr; replacing &alpha; &hArr; &beta; with (&alpha; &rArr; &beta;) &and; (&beta; &rArr; &alpha;)*
