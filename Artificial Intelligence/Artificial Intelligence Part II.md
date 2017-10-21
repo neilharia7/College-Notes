@@ -164,6 +164,11 @@ X &rArr; Y, Y &#8866; X
 			*	P &and; Q &and; ... &and; T &rArr; U
 		- Fact: U
 
+### Limits of Propositional Logic
+Propositional logic is a *weak logic*
+*	Too many propositions to TELL the KB. Results in increased time complexity of inference.
+*	Handling changes in the environment is difficult.
+
 
 ## First Order Logic (FOL)
 *	In first-order logic, the world is seen as object with properties (about each object) and relations (betweeen objects).
@@ -229,7 +234,42 @@ X &rArr; Y, Y &#8866; X
 		*	e.g. ASK(KB, &exist;x Child(William, x)) yields (x / Charles)
 *	Knowedge-based agents need to use goals in conjuction with knowledge to make plans.
 	
+## Inference in First-Order Logic
 
+### Inference Rules w/ Quantifiers
+#### Substitutions 
+*	SUBST(&theta;, &alpha;): binding list &theta; is applied to a sentence &alpha;.
+	*	e.g. SUBST({x / John, y / Richard}, Brother(x, y)) = Brother(John, Richard)
+	
+#### Aditional Inference Rules
+
+**Universal Elimination:**
+> &forall;x &alpha; &#8872; SUBST({x / g}, &alpha;) &nbsp;&nbsp;&nbsp; where `g` is a ground term
+
+**Existential Elimination:**
+> &exist;x &alpha; &#8872; SUBST({x / K}, &alpha;) &nbsp;&nbsp;&nbsp; where `K` is a *Skolem constant*
+
+**Existential Introduction:**
+> &alpha; &#8872; &exist;x SUBST({x / g}, &alpha;) &nbsp;&nbsp;&nbsp; where `g` is a ground term
+
+#### Skolemization
+Existential quantifiers (&exist;) can be eliminated by replacing the corresponding variable with a Skolem function. The arguments of a Skolem function include all the universally quantified variables that are bound by universal quantifiers whose scopes include the scope of the existential quantifier being eliminated. If a Skolem function has no arguments, it's known as a Skolem constant.
+
+*	&forall;x &exist;y P(x, y) becomes &forall;x P(x, S(x))
+*	&exist;y &forall;x P(x, y) becomes &forall;x P(x, S)
+*	&exist;y P(y) becomes P(S)
+
+### Forward & Backward Chaining
+
+*	**Forward Chaining (data driven) &mdash;** Start with the KB and generate new sentences given a particular event (&alpha;). KB, &alpha; &#8872; ?.
+*	**Bacward Chaining (goal driven) &mdash;** Start with a sentence not in the KB (&beta;) and attempt to establish its premises. KB &#8872; &beta; ?.
+
+#### Forward Chaining 
+**Idea:** Inferring new consequences.
+
+**Pseudo Algorithm**
+1.	TELLing a new sentence &alpha;.
+2.	
 ### Conversion to CNF (Conjunctional Normalized Form)
 *	Eliminate biconditionals &hArr; and implications &rArr;
 *	*Eliminate &hArr; replacing &alpha; &hArr; &beta; with (&alpha; &rArr; &beta;) &and; (&beta; &rArr; &alpha;)*
