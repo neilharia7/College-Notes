@@ -253,11 +253,49 @@ Propositional logic is a *weak logic*
 > &alpha; &#8872; &exist;x SUBST({x / g}, &alpha;) &nbsp;&nbsp;&nbsp; where `g` is a ground term
 
 #### Skolemization
+
 Existential quantifiers (&exist;) can be eliminated by replacing the corresponding variable with a Skolem function. The arguments of a Skolem function include all the universally quantified variables that are bound by universal quantifiers whose scopes include the scope of the existential quantifier being eliminated. If a Skolem function has no arguments, it's known as a Skolem constant.
 
 *	&forall;x &exist;y P(x, y) becomes &forall;x P(x, S(x))
 *	&exist;y &forall;x P(x, y) becomes &forall;x P(x, S)
 *	&exist;y P(y) becomes P(S)
+
+### Unification
+*	Find a substitution that makes two atomic sentences alike. or `When two terms match we say that they unify.`
+	*	Their structures and arguments are compatible.
+*	i.e. UNIFY(&alpha;, &beta;) = &theta; where SUBST(&theta;, &alpha;) = SUBST(&theta;, &beta;)
+	*	**Examples (Terms that unify)**
+		*	'Hey you' = 'Hey you' 
+		*	foo(X) = foo(bar)            `X = bar` 
+		*	foo(N, N) = foo(bar, X)      `N = bar, X = bar`
+	*	**Examples (Terms that don't unify)**
+		*	'Hey you' = 'Hey me'
+		*	foo(bar) = foo(bar, bar)
+		*	foo(N, N) = foo(bar, rab)
+
+
+#### Composition of Substitutions
+> SUBST(Compose(&theta;<sub>1</sub>, &theta;<sub>2</sub>), &alpha;) = SUBST(&theta;<sub>2</sub>, SUBST(&theta;<sub>1</sub>, &alpha;))
+
+### Proof as a Search Problem
+- Proof procedure is a sequence of inference rules applied to the KB.
+- Initial State i.e. KB → Operators i.e. Inference Rules → Goal State i.e. KB w/ Goal
+- Branching factor increases as the KB grows.
+
+### Generalised Modus Ponens
+Universal-Elimination + And-Introduction + Modus Ponens
+
+**Example:**<br>
+Missile(M1),<br>
+Owns(Nono, M1),<br>
+&forall;x Missile(x) &and; Owns(Nono, x) &rArr; Sells(West, Nono, x)<br>
+&#8872; Sells(West, Nono, M1)
+
+> &gamma;<sub>1</sub>, &gamma;<sub>2</sub>,...,&gamma;<sub>n</sub>, (&alpha;<sub>1</sub> &and; &alpha;<sub>2</sub> &and; ... &and; &alpha;<sub>n</sub> &rArr; &beta;) &#8872; SUBST(&theta;, &beta;)
+> where &forall;i SUBST(&theta;, &gamma;<sub>i</sub>) = SUBST(&theta;, &alpha;<sub>i</sub>)
+
+Every fact (&gamma;<sub>i</sub>) must have a corresponding antecedent (&alpha;<sub>i</sub>) in the rule for GMP.
+
 
 ### Forward & Backward Chaining
 
@@ -268,6 +306,7 @@ Existential quantifiers (&exist;) can be eliminated by replacing the correspondi
 **Idea:** Inferring new consequences.
 
 **Pseudo Algorithm**
+
 1.	TELLing a new sentence &alpha;.
 2.	If &alpha; is already in the KB, do nothing.
 3.	Find all the implications that have &alpha; as a premise, i.e. &alpha; &and; &alpha;<sub>1</sub> &and; ... &and; &alpha;<sub>n</sub> &rArr; &beta;.
@@ -279,6 +318,23 @@ Existential quantifiers (&exist;) can be eliminated by replacing the correspondi
 1. 	Given a KB, derive all the facts and rules.
 2. 	If there are facts with &exist;, skolemize them and derive the new facts.
 3. 	Use GMP to satisfy the rules and derive new facts recursively until the goal is reached.
+
+#### Backward Chaining
+**Idea:** Checking for causes.
+
+**Pseudo Algorithm**
+
+1.	ASKing a query &beta;.
+2.	If &beta; is already in the KB, proof immediate.
+3.	Else, find all implications that have &beta; as a conclusion, i.e. &alpha;<sub>1</sub> &and; &alpha;<sub>2</sub> &and; ... &and; &alpha;<sub>n</sub> &rArr; &beta;.
+4.	Then, try and establish all the premises &alpha;<sub>i</sub> and infer &beta;.
+
+**Using Backward Chaining**
+
+1. 	Given a KB, derive all the facts and rules.
+2. 	If there are facts with &exist;, skolemize them and derive the new facts.
+3. 	Derive a unifying list that satisfies the goal &beta;.
+
 
 ### Conversion to CNF (Conjunctional Normalized Form)
 *	Eliminate biconditionals &hArr; and implications &rArr;
