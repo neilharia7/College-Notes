@@ -12,12 +12,19 @@
 	*	*Knowledge Inference*
 	
 ### Knowledge-Based Agents
-*	Knowledge Base (KB): Set of Sentences (Sentence = Representation of a Fact/Rule).
-*	Adding & Querying Knowledge
-	*	*TELL*: add a sentence to the KB
-	*	*ASK*: retrieve knowledge from the KB
-		*	Answer must *follow* from what has been *TELL*-ed.
-		
+*	**Basics:**
+	*	A knowledge-based agent has a knowledge base(KB)
+	*	Knowledge Base (KB): Set of Sentences (Sentence = Representation of a Fact/Rule).
+	*	The two operations on the KB are **TELL** and **ASK**
+	*	Adding & Querying Knowledge
+		*	`TELL`: add a sentence to the KB
+		*	`ASK`: retrieve knowledge from the KB
+			*	Answer must *follow* from what has been *TELL*-ed.
+	*	When a knowledg-based agent receives a percept, it tells the KB that it received the precept
+	*	When a knowledge-based agent performs an action, it tells the KB that it performed the action
+	*	An agent's designer can prime the KB with initial knowledge
+	*	Agents can learn new knowledge
+	
 *	Infernce Mechanism: Determines what follows from the KB.
 *	Knowledge Based System
 	*	States: Instances of the KB
