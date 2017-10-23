@@ -20,7 +20,7 @@
 		*	`TELL`: add a sentence to the KB
 		*	`ASK`: retrieve knowledge from the KB
 			*	Answer must *follow* from what has been *TELL*-ed.
-	*	When a knowledg-based agent receives a percept, it tells the KB that it received the precept
+	*	When a knowledge-based agent receives a percept, it tells the KB that it received the precept
 	*	When a knowledge-based agent performs an action, it tells the KB that it performed the action
 	*	An agent's designer can prime the KB with initial knowledge
 	*	Agents can learn new knowledge
