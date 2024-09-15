@@ -1,3 +1,4 @@
+import heapq
 import sys
 sys.setrecursionlimit(10000)
 
@@ -10,9 +11,9 @@ c => constant
 Algorithms              | Cost      | Time      | Space     | Idea
 
 Backtracking Search     | Any       | O(b ^ D)  | O(D)      | Browse the entire space
-DFS                     | 0         | O(b ^ D)  | O(D)      | Backtracking Search + stop when find the first end state. 
+DFS                     | 0         | O(b ^ D)  | O(D)      | Backtracking Search + stop when find the first end state.
 BFS                     | c >= 0    | O(b ^ d)  | O(b ^ d)  | Goes layer by layer until it finds the end state, but it's worse in space as it needs to maintain the history
-DFS - ID                | c >= 0    | O(b ^ d)  | O(d)      | 
+DFS - ID                | c >= 0    | O(b ^ d)  | O(d)      |
 (Iterative Deepening)   |
 
 
@@ -20,21 +21,52 @@ Always exponential time
 Avoid exponential space with DFS-ID
 """
 
+class PriorityQueue:
+
+    def __init__(self):
+        self.DONE = -100000
+        self.heap = []
+        self.priorities = {} # map from state to priority
+
+    # Insert |state| into the heap with priority |newPriority| if
+    # |state| isn't in the heap or |newPriority| is smaller than the existing
+    # priority
+
+    # Return whether the priority queue is updated.
+    def update(self, state, newPriority):
+        oldPriority = self.priorities.get(state)
+
+        if oldPriority is None or newPriority < oldPriority:
+            self.priorities[state] = newPriority
+            heapq.heappush(self.heap, (newPriority, state))
+            return True
+        return False
+
+    # Returns (state with minimum priority, priority)
+    # or (None, None) if the priority queue is empty
+    def removeMin(self):
+        while len(self.heap) > 0:
+            priority, state = heapq.heappop(self.heap)
+            if self.priorities[state] == self.DONE: continue # Outdated priority, skip
+            self.priorities[state] = self.DONE
+            return state, priority
+        return None, None  # Nothing left..
+
 
 ### Model (search problem)
 
 class TransportationProblem(object):
-    
+
     def __init__(self, N):
         # N = number of block
         self.N = N
-    
+
     def startState(self):
         return 1
-    
+
     def isEnd(self, state):
         return state == self.N
-    
+
     def succAndCost(self, state):
         # return list of (actions, newState, cost) triples
         result = []
@@ -42,9 +74,9 @@ class TransportationProblem(object):
             result.append(('walk', state + 1, 1))
         if state * 2 <= self.N:
             result.append(('tram', state * 2, 2))
-            
+
         return result
-    
+
 ### Algorithms
 def printSolution(solution):
     totalCost, history = solution
@@ -58,11 +90,11 @@ def backtrackingSearch(problem: TransportationProblem):
         'cost': float('+inf'),
         'history': None
     }
-    
+
     def recurse(state, history, totalCost):
         # At state, having undergone history, accumulated totalCost.
         # Explore the rest of the subtree under state.
-        
+
         if problem.isEnd(state=state):
             # Update the best solution so far
             # TODO
@@ -70,12 +102,12 @@ def backtrackingSearch(problem: TransportationProblem):
                 best['cost'] = totalCost
                 best['history'] = history
             return
-        
+
         # Recurse on children
         for action, newState, cost in problem.succAndCost(state=state):
             recurse(newState, history+[(action, newState, cost)], totalCost + cost)
     recurse(problem.startState(), history=[], totalCost=0)
-    
+
     return best['cost'], best['history']
 
 
@@ -98,7 +130,7 @@ FutureCost(s) = {   0                                               if IsEnd(s)
 
 Key Idea:
 A `state` is a summary of all the past actions sufficient to
-choose future actions optimally 
+choose future actions optimally
 """
 
 def dynamicProgramming(problem: TransportationProblem):
@@ -113,14 +145,8 @@ def dynamicProgramming(problem: TransportationProblem):
         result = min(cost + futureCost(newState) for action, newState, cost in problem.succAndCost(state))
         cache[state] = result
         return result
-        
+
     return futureCost(state=problem.startState()), []
-
-
-### Main
-problem = TransportationProblem(N=20)
-# printSolution(backtrackingSearch(problem))
-printSolution(dynamicProgramming(problem))
 
 
 """
@@ -140,4 +166,49 @@ State: summary of past acitons sufficient to choose future actions optimally
 Dynamic Programming: backtracking search with memoization - potentially exponential savings
 
 DP only works with acyclic graphs.. what if there are cycles?
+"""
+
+def uniformCostSearch(problem: TransportationProblem):
+
+    frontier = PriorityQueue()
+    frontier.update(problem.startState(), 0)
+    while True:
+        # Move from frontier to explored
+        state, pastCost = frontier.removeMin()
+        if problem.isEnd(state):
+            return pastCost, []
+
+        # Push out on the frontier
+        for action, newState, cost in problem.succAndCost(state):
+            frontier.update(newState, pastCost + cost)
+
+
+"""
+Analysis of uniform cost search
+
+Theorem: correctness
+When a state `s` is popped from the frontier and moved to the explored,
+it's priority is PastCost(s), the minimum cost to `s`.
+"""
+
+
+### Main
+problem = TransportationProblem(N=40)
+printSolution(backtrackingSearch(problem))
+printSolution(dynamicProgramming(problem))
+printSolution(uniformCostSearch(problem))
+
+"""
+DP vs UCS
+N total states, n of which are closer than end state
+
+Algorithms  | Cycles?   | Action costs  | Time/Space
+DP          | no        | any           | O(N)
+UCS         | yes       | >=0           | O(nlogn)
+
+Note: UCS potentially explores fewer states,
+but requires more overhead to maintain the priority queue
+
+Note: assume number of actions per state is constant (independent of n & N)
+
 """
