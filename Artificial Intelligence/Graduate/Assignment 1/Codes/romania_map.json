@@ -1,0 +1,22 @@
+{
+    'Oradea': ['Zerind', 'Sibiu'],
+    'Zerind': ['Arad', 'Oradea'],
+    'Arad': ['Timisoara', 'Sibiu', 'Zerind'],
+    'Timisoara': ['Arad', 'Lugoj'],
+    'Lugoj': ['Mehadia', 'Timisoara'],
+    'Mehadia': ['Drobeta', 'Lugoj'],
+    'Drobeta': ['Mehadia', 'Craiova'],
+    'Craiova': ['Drobeta', 'Rimnicu Vilcea', 'Pitesti'],
+    'Rimnicu Vilcea': ['Sibiu', 'Craiova', 'Pitesti'],
+    'Sibiu': ['Oradea', 'Arad', 'Fagaras', 'Rimnicu Vilcea'],
+    'Fagaras': ['Sibiu', 'Bucharest'],
+    'Pitesti': ['Rimnicu Vilcea', 'Craiova', 'Bucharest'],
+    'Bucharest': ['Fagaras', 'Pitesti', 'Giurgiu', 'Urziceni'],
+    'Giurgiu': ['Bucharest'],
+    'Urziceni': ['Vaslui', 'Bucharest', 'Hirsova'],
+    'Hirsova': ['Urziceni', 'Eforie'],
+    'Eforie': ['Hirsova'],
+    'Vaslui': ['Iasi', 'Urziceni'],
+    'Iasi': ['Vaslui', 'Neamt'],
+    'Neamt': ['Iasi']
+}
