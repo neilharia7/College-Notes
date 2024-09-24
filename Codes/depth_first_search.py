@@ -28,7 +28,7 @@ def dfs(start_city, goal_city):
     :param start_city: the starting city
     :param goal_city: the city where we want to reach
 
-    :return: path from start city to goal city or None if no path found
+    :return: path from start_city city to goal_city city or None if no path found
     """
 
     # to keep track of the visited nodes
@@ -42,7 +42,7 @@ def dfs(start_city, goal_city):
         path = stack.pop()
         city = path[-1]
 
-        # check if the current city is the goal city
+        # check if the current city is the goal_city city
         if city == goal_city:
             return path
 

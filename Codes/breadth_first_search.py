@@ -44,7 +44,7 @@ def bfs(start_city, goal_city):
         city = path[-1]
 
         # base condition
-        # check if the current city is the goal city
+        # check if the current city is the goal_city city
         if city == goal_city:
             return path
 

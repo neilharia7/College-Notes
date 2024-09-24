@@ -331,11 +331,29 @@
 *	An assignment that does not violate any constraints is called a consistent or legal assignment.
 *	A solution to a CSP is an assignment with every variable given a value (complete) and one that satisfies all the constraints.
 
+#### Varieties of CSP
+* Discrete variables
+  * Finite Domains -> 
+  * Infinite Domains
+* Continuous variables 
+
 ### CSP Incremental Formulation
 *	`States:` defined by the variables assigned so far.
 *	`Initial State:` all variables unassigned.
 *	`Operators:` assign a value to an unassigned variable.
 *	`Goal Test:` all variables assigned, no contraints violated.
+      * Every solution appears at depth `n` with `n` variables (uses Depth first Search)
+      * Path is irrelevant, so can also use complete state formulation
+      * `b = (n - l) * d` at depth `l`, hence `n!d^n` leaves
+
+### Realworld CSPs
+
+* Assignment problems
+* Timetabling problems
+* Hardware configurations
+* Spreadsheets
+* FloorPlanning
+* Scheduling
 
 ### Search in CSP
 *	No. of Variables: *n*
@@ -343,9 +361,16 @@
 *	Depth of Solution State: *n* (all variables assigned)
 *	Search Algorithm: Depth-First Search
 
-#### Backtracking
+
+### Backtracking
 *	Simple DFS wastes time searching when constraints have already been violated.
 *	**Solution:** Before generating successors, check if constraints have been violated. If yes, backtrack to the last decision point and continue.
+
+### Improving backtracking efficiency
+* General purpose methods can lead to important gains in the speed
+* In what order should its values be tried
+* Can we detect inevitable failure early?
+* Can we take advantage of problem structure
 
 #### Heuristics/Methods for CSP
 *	Plain backtracking is an uninformed algorithm.
@@ -381,6 +406,12 @@
 *	Constraint propagation involves propagating the implications of an assignment of one variable onto **all** other variables, according to the specified constraints.
 *	i.e. eliminate values from domains of variables that can never be part of a consistent solution.
 *	Leads to a reduction of the search space.
+
+**Nearly Tree-structured CSPs**
+
+*	Conditioning: instantiate a variable, prune its neighbor's domains
+  * TODO
+  * q
 
 #### Local Search
 *	**Complete-State Formulation:**
