@@ -409,9 +409,9 @@
 
 **Nearly Tree-structured CSPs**
 
-*	Conditioning: instantiate a variable, prune its neighbor's domains
-  * TODO
-  * q
+* Conditioning: instantiate a variable, prune its neighbor's domains
+* TODO update
+* Cutset conditioning: A technique that involves removing a subset of variables from the graph to make it tree-structured. The removed variables are called a cutset. The remaining variables are then instantiated in all possible ways, and the domains of the remaining variables are pruned. Finally, the resulting tree-structured CSP is solved.
 
 #### Local Search
 *	**Complete-State Formulation:**
